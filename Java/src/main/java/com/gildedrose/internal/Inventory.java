@@ -3,6 +3,8 @@ package com.gildedrose.internal;
 import com.gildedrose.Item;
 import org.jetbrains.annotations.Contract;
 
+import java.util.Arrays;
+
 public class Inventory {
 
     /**
@@ -13,6 +15,16 @@ public class Inventory {
         if (item == null) {
             throw new IllegalArgumentException("An item cannot be null");
         }
-        return new Good(item);
+        if (item.name.equals("Aged Brie")) {
+            return new Good(item, SellInUpdater.forRegularGood(), QualityUpdater.forWellAgingItem());
+        }
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            return new Good(item, SellInUpdater.forLegendaryGood(), QualityUpdater.forLegendaryItem());
+        }
+        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            return new Good(item, SellInUpdater.forRegularGood(),
+                            QualityUpdater.forSpeculativeItem(Arrays.asList(10, 5)));
+        }
+        return new Good(item, SellInUpdater.forRegularGood(), QualityUpdater.forRegularItem());
     }
 }

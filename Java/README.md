@@ -23,6 +23,7 @@ gradlew.bat build
 * New classes should reside in a different package, to reduce the risk of API leakage;
 * Inventory goods should own their update logic;
 * Extract logic to update `Item` properties as separate mutators for sellIn and quality.
+* Boundary logic for quality could be centralised in the future.
 
 ## Notes
 
@@ -31,4 +32,4 @@ gradlew.bat build
 * We expect that the provided `Item[] items` in the constructor to not be modified by the supplier afterward 
   (i.e: swapping an item with another one)
 * We don't really have control on initial quality of items. We have to assume that the provided once will respect the
-  describe boundaries
+  describe boundaries.
