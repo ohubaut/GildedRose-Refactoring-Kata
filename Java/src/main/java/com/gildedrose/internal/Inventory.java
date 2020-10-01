@@ -7,6 +7,9 @@ import java.util.Arrays;
 
 public class Inventory {
 
+    private Inventory() {
+    }
+
     /**
      * Converts an {@code Item} into a sellable Good
      */

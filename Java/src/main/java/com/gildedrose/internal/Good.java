@@ -4,7 +4,6 @@ import com.gildedrose.Item;
 
 public class Good {
 
-    static final int MAX_QUALITY = 50;
     private final Item item;
     private final SellInUpdater sellInUpdater;
     private final QualityUpdater qualityUpdater;

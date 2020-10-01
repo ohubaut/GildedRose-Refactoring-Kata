@@ -5,7 +5,10 @@ import com.gildedrose.Item;
 import java.util.List;
 import java.util.function.Consumer;
 
+@FunctionalInterface
 interface QualityUpdater extends Consumer<Item> {
+
+    int MAX_QUALITY = 50;
 
     static QualityUpdater forRegularItem() {
         return item -> {
@@ -22,7 +25,7 @@ interface QualityUpdater extends Consumer<Item> {
     static QualityUpdater forWellAgingItem() {
         return item -> {
             final int increaseValue = item.sellIn >= 0 ? 1 : 2;
-            item.quality = Math.min(Good.MAX_QUALITY, item.quality + increaseValue);
+            item.quality = Math.min(MAX_QUALITY, item.quality + increaseValue);
         };
     }
 
@@ -36,7 +39,7 @@ interface QualityUpdater extends Consumer<Item> {
                 return;
             }
             final long increaseValue = 1 + sellInMarkers.stream().filter(marker -> item.sellIn < marker).count();
-            item.quality = (int) Math.min(Good.MAX_QUALITY, item.quality + increaseValue);
+            item.quality = (int) Math.min(MAX_QUALITY, item.quality + increaseValue);
         };
     }
 
