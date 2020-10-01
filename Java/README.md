@@ -21,7 +21,8 @@ gradlew.bat build
 * `Item` class should be treated as an immutable dependency => state changes should be propagated, even if handled
   differently;
 * New classes should reside in a different package, to reduce the risk of API leakage;
-* Inventory goods should own their degrading logic.
+* Inventory goods should own their update logic;
+* Extract logic to update `Item` properties as separate mutators for sellIn and quality.
 
 ## Notes
 
@@ -29,3 +30,5 @@ gradlew.bat build
   decide to move to JPMS)
 * We expect that the provided `Item[] items` in the constructor to not be modified by the supplier afterward 
   (i.e: swapping an item with another one)
+* We don't really have control on initial quality of items. We have to assume that the provided once will respect the
+  describe boundaries

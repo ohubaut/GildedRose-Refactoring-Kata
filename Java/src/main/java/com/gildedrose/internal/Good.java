@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 
 public class Good {
 
-    private static final int DEFAULT_MAX_QUALITY = 50;
+    static final int MAX_QUALITY = 50;
     private final Item item;
 
     Good(final Item item) {
@@ -19,18 +19,18 @@ public class Good {
                 }
             }
         } else {
-            if (item.quality < DEFAULT_MAX_QUALITY) {
+            if (item.quality < MAX_QUALITY) {
                 item.quality += 1;
 
                 if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                     if (item.sellIn < 11) {
-                        if (item.quality < DEFAULT_MAX_QUALITY) {
+                        if (item.quality < MAX_QUALITY) {
                             item.quality += 1;
                         }
                     }
 
                     if (item.sellIn < 6) {
-                        if (item.quality < DEFAULT_MAX_QUALITY) {
+                        if (item.quality < MAX_QUALITY) {
                             item.quality += 1;
                         }
                     }
@@ -54,7 +54,7 @@ public class Good {
                     item.quality -= item.quality;
                 }
             } else {
-                if (item.quality < DEFAULT_MAX_QUALITY) {
+                if (item.quality < MAX_QUALITY) {
                     item.quality += 1;
                 }
             }
