@@ -2,20 +2,28 @@ package com.gildedrose.internal;
 
 import com.gildedrose.Item;
 
-import java.util.function.Consumer;
-
 public class Good {
 
     static final int MAX_QUALITY = 50;
     private final Item item;
-    private final Consumer<Item> itemUpdater;
+    private final SellInUpdater sellInUpdater;
+    private final QualityUpdater qualityUpdater;
 
     Good(final Item item, final SellInUpdater sellInUpdater, final QualityUpdater qualityUpdater) {
         this.item = item;
-        itemUpdater = sellInUpdater.andThen(qualityUpdater);
+        this.sellInUpdater = sellInUpdater;
+        this.qualityUpdater = qualityUpdater;
     }
 
     public void updateQuality() {
-        itemUpdater.accept(item);
+        sellInUpdater.andThen(qualityUpdater).accept(item);
+    }
+
+    Good conjure() {
+        final QualityUpdater conjuredUpdater = i -> {
+            qualityUpdater.accept(i);
+            qualityUpdater.accept(i);
+        };
+        return new Good(item, sellInUpdater, conjuredUpdater);
     }
 }

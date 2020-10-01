@@ -40,14 +40,4 @@ interface QualityUpdater extends Consumer<Item> {
         };
     }
 
-    static QualityUpdater singlePass(final QualityUpdater baseUpdater) {
-        return baseUpdater;
-    }
-
-    static QualityUpdater doublePass(final QualityUpdater baseUpdater) {
-        return item -> {
-            baseUpdater.accept(item);
-            baseUpdater.accept(item);
-        };
-    }
 }
