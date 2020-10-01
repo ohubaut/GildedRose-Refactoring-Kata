@@ -39,4 +39,15 @@ interface QualityUpdater extends Consumer<Item> {
             item.quality = (int) Math.min(Good.MAX_QUALITY, item.quality + increaseValue);
         };
     }
+
+    static QualityUpdater singlePass(final QualityUpdater baseUpdater) {
+        return baseUpdater;
+    }
+
+    static QualityUpdater doublePass(final QualityUpdater baseUpdater) {
+        return item -> {
+            baseUpdater.accept(item);
+            baseUpdater.accept(item);
+        };
+    }
 }

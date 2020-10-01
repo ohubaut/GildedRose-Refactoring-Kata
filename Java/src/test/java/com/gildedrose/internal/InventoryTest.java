@@ -62,4 +62,21 @@ class InventoryTest {
         assertAll(() -> assertEquals(sellIn - 1, backstagePass.sellIn, "SellIn should have decreased"),
                   () -> assertEquals(expectedQuality, backstagePass.quality, "Quality does not match expectation"));
     }
+
+    @Test
+    void conjured_item_decrease_twice_as_fast() {
+        final Item agedBrie = new Item("Conjured Aged Brie", 2, 0);
+        final Good conjuredBrie = Inventory.stockItem(agedBrie);
+        conjuredBrie.updateQuality();
+
+        assertAll(() -> assertEquals(1, agedBrie.sellIn, "SellIn should have decrease"),
+                  () -> assertEquals(2, agedBrie.quality, "Quality should have increase"));
+
+        final Item manaCake = new Item("Conjured Mana Cake", 3, 6);
+        final Good conjuredCake = Inventory.stockItem(manaCake);
+        conjuredCake.updateQuality();
+
+        assertAll(() -> assertEquals(2, manaCake.sellIn, "SellIn should have decrease"),
+                  () -> assertEquals(4, manaCake.quality, "Quality should have increase"));
+    }
 }
